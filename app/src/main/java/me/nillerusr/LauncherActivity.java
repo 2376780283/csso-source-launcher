@@ -136,7 +136,7 @@ public class LauncherActivity extends Activity
 			startActivity( intent );
 		} );
 
-		Button getHL2Button = findViewById( R.id.get_hl2 );
+		/*Button getHL2Button = findViewById( R.id.get_hl2 );
 		getHL2Button.setOnClickListener( v ->
 		{
 			SharedUtil.startBrowser( getApplicationContext(), "https://store.steampowered.com/app/240" ); // Counter-Strike Source: Deathmatch store page
@@ -146,7 +146,7 @@ public class LauncherActivity extends Activity
 		getCSSOCButton.setOnClickListener( v ->
 		{
 			SharedUtil.startBrowser( getApplicationContext(), getString( R.string.csso_download_url ) );
-		} );
+		} );*/
 
 		cmdArgs.setText( mPref.getString( "argv", getString( R.string.default_commandline_arguments ) ) );
 		GamePath.setText( mPref.getString( "gamepath", getDefaultDir() + "/srceng" ) );
