@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TF2Classic"
+rootProject.name = "CSSO"
 include ':app'

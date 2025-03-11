@@ -11,7 +11,7 @@ android {
 		disable 'ExpiredTargetSdkVersion'
 	}
 
-	namespace 'me.sanyasho.tf2classic'
+	namespace 'me.dmk95.csso'
 	compileSdk 29
 
 	packagingOptions {
@@ -21,13 +21,13 @@ android {
 	}
 
 	defaultConfig {
-		applicationId "me.sanyasho"
-		applicationIdSuffix "tf2classic"
+		applicationId "me.dmk95"
+		applicationIdSuffix "csso"
 		minSdk 24
 		targetSdk 29
 		versionCode getBuildNum()
 		versionName "2.0.0b4+"
-		archivesBaseName "tf2classic"
+		archivesBaseName "csso"
 	}
 
 	sourceSets {

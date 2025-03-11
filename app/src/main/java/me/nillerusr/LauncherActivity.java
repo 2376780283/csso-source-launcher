@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import me.sanyasho.tf2classic.R;
+import me.dmk95.csso.R;
 import me.sanyasho.util.SharedUtil;
 import su.xash.fwgslib.CertCheck;
 
@@ -34,7 +34,7 @@ public class LauncherActivity extends Activity
 {
 	public static String TAG = "LauncherActivity";
 
-	public static String MOD_NAME = "tf2classic";
+	public static String MOD_NAME = "csso";
 	public static String PKG_NAME;
 
 	static EditText cmdArgs = null, GamePath = null;
@@ -110,7 +110,7 @@ public class LauncherActivity extends Activity
 
 			new AlertDialog.Builder( this )
 				.setTitle( R.string.srceng_launcher_error )
-				.setMessage( R.string.tf2classic_bad_device )
+				.setMessage( R.string.csso_bad_device )
 				.setPositiveButton( R.string.srceng_launcher_ok, null )
 				.show();
 		}
@@ -139,17 +139,17 @@ public class LauncherActivity extends Activity
 		Button getHL2Button = findViewById( R.id.get_hl2 );
 		getHL2Button.setOnClickListener( v ->
 		{
-			SharedUtil.startBrowser( getApplicationContext(), "https://store.steampowered.com/app/320" ); // Half-Life 2: Deathmatch store page
+			SharedUtil.startBrowser( getApplicationContext(), "https://store.steampowered.com/app/240" ); // Counter-Strike Source: Deathmatch store page
 		} );
 
-		Button getTF2CButton = findViewById( R.id.get_tf2c );
-		getTF2CButton.setOnClickListener( v ->
+		Button getCSSOCButton = findViewById( R.id.get_csso );
+		getCSSOCButton.setOnClickListener( v ->
 		{
-			SharedUtil.startBrowser( getApplicationContext(), getString( R.string.tf2c_download_url ) );
+			SharedUtil.startBrowser( getApplicationContext(), getString( R.string.csso_download_url ) );
 		} );
 
 		cmdArgs.setText( mPref.getString( "argv", getString( R.string.default_commandline_arguments ) ) );
-		GamePath.setText( mPref.getString( "gamepath", getDefaultDir() + "/srceng_tf2classic" ) );
+		GamePath.setText( mPref.getString( "gamepath", getDefaultDir() + "/srceng" ) );
 
 		// permissions check
 		applyPermissions( new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO }, REQUEST_PERMISSIONS );
@@ -224,7 +224,7 @@ public class LauncherActivity extends Activity
 		{
 			new AlertDialog.Builder( this )
 					.setTitle( R.string.srceng_launcher_error )
-					.setMessage( R.string.tf2classic_game_check )
+					.setMessage( R.string.csso_game_check )
 					.setPositiveButton( R.string.srceng_launcher_ok, null )
 					.show();
 

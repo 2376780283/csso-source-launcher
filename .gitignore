@@ -17,6 +17,7 @@ local.properties
 Thumbs.db
 
 /app/src/main/assets/extras_dir.vpk
+/scripts/.venv
 android-sdk
 
 *.so

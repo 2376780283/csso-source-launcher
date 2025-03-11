@@ -1,5 +1,5 @@
 /*
-* tf2classic-android-launcher
+* csso-android-launcher
 * Copyright (C) 2024  SanyaSho
 *
 * This program is free software: you can redistribute it and/or modify
