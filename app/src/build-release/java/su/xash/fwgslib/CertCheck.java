@@ -46,7 +46,7 @@ public class CertCheck
 		return APK_KEY;
 	}
 
-	public static boolean dumbAntiMoronCheck( Context context )
+	/*public static boolean dumbAntiMoronCheck( Context context )
 	{
 		// Certificate checking
 		if( dumbCertificateCheck( context, context.getPackageName(), "4ZAs8ABJX7mIVC6DAPxT0B2Rh04=", false ) )
@@ -56,9 +56,9 @@ public class CertCheck
 		}
 
 		return false;
-	}
+	}*/
 
-	public static boolean dumbCertificateCheck( Context context, String pkgName, @NonNull String sig, boolean failIfNoPkg )
+	/*public static boolean dumbCertificateCheck( Context context, String pkgName, @NonNull String sig, boolean failIfNoPkg )
 	{
 		Log.d( TAG, "pkgName = " + pkgName );
 		try
@@ -100,5 +100,5 @@ public class CertCheck
 		}
 
 		return true;
-	}
+	}*/
 }

@@ -88,13 +88,13 @@ public class LauncherActivity extends Activity
 
 		super.setTheme( 0x01030224 );
 
-		if( CertCheck.dumbAntiMoronCheck( this ) )
+		/*if( CertCheck.dumbAntiMoronCheck( this ) )
 		{
 			Toast.makeText( this, "Buckle the fuck up little doggy", Toast.LENGTH_LONG ).show();
 
 			finish();
 			return;
-		}
+		}*/
 
 		mPref = getSharedPreferences( "mod", 0 );
 
@@ -220,7 +220,7 @@ public class LauncherActivity extends Activity
 		SharedPreferences.Editor editor = mPref.edit();
 		editor.putString( "argv", argv );
 
-		if( argv.contains( "-game" ) )
+		if( argv.contains( "-game " ) )
 		{
 			new AlertDialog.Builder( this )
 					.setTitle( R.string.srceng_launcher_error )
