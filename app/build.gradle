@@ -26,7 +26,7 @@ android {
 		minSdk 24
 		targetSdk 29
 		versionCode getBuildNum()
-		versionName "2.0.0b4+"
+		versionName "0.11"
 		archivesBaseName "csso"
 	}
 

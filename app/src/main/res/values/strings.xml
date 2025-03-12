@@ -26,8 +26,7 @@
 
 	<!-- New About dialog stuff -->
 	<string name="about_links" translatable="false">
-		• <a href="https://t.me/csgomodcss">Discord (CSSO Port)</a>\n
-		• <a href="https://t.me/csgomodcss">Discord (HL2)</a>
+		• <a href="https://t.me/csgomodcss">Telegram (CSSO Port)</a>\n
 	</string>
 	<string name="about_authors">
 		<b>Source Engine Android port made by:</b>\n
