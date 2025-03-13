@@ -31,12 +31,12 @@ public class CertCheck
 		return true;
 	}
 
-	public static String getApkKey()
+	/*public static String getApkKey()
 	{
 		return "4ZAs8ABJX7mIVC6DAPxT0B2Rh04="; // totally not a security breach
 	}
 
-	/*public static boolean dumbAntiMoronCheck( Context context )
+	public static boolean dumbAntiMoronCheck( Context context )
 	{
 		return false; // we're always white
 	}*/

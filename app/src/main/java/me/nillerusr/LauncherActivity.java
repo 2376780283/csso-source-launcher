@@ -104,20 +104,7 @@ public class LauncherActivity extends Activity
 		GamePath = findViewById( R.id.edit_gamepath );
 
 		Button button = findViewById( R.id.button_launch );
-		if( !CertCheck.IsDebugBuild() && ( SharedUtil.IsDeviceBrick( getApplicationContext() ) || SharedUtil.IsDeviceTooOld( getApplicationContext() ) ) )
-		{
-			button.setEnabled( false );
-
-			new AlertDialog.Builder( this )
-				.setTitle( R.string.srceng_launcher_error )
-				.setMessage( R.string.csso_bad_device )
-				.setPositiveButton( R.string.srceng_launcher_ok, null )
-				.show();
-		}
-		else
-		{
-			button.setOnClickListener( LauncherActivity.this::startSource );
-		}
+		button.setOnClickListener( LauncherActivity.this::startSource );
 
 		if( CertCheck.IsDebugBuild() )
 		{
@@ -199,12 +186,12 @@ public class LauncherActivity extends Activity
 		i.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
 		saveSettings( mPref.edit() );
 
-		// SanyaSho: add -force_hardware_id here
+		/*// SanyaSho: add -force_hardware_id here
 		String APKKEY = CertCheck.getApkKey();
 		if( !APKKEY.isEmpty() )
 		{
 			argv = argv + "-force_hardware_id " + APKKEY + " ";
-		}
+		}*/
 
 		if( argv.length() != 0 )
 			i.putExtra( "argv", argv );

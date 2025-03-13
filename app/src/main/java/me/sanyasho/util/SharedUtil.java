@@ -37,7 +37,7 @@ public class SharedUtil
 		ctx.startActivity( browserIntent );
 	}
 
-	public static boolean IsDeviceBrick( Context ctx )
+	/*public static boolean IsDeviceBrick( Context ctx )
 	{
 		ActivityManager actManager = ( ActivityManager ) ctx.getSystemService( ACTIVITY_SERVICE );
 		assert actManager != null;
@@ -65,17 +65,17 @@ public class SharedUtil
 		}
 
 		return false;
-	}
+	}*/
 
 	public static String prepareArgv( String oldargv )
 	{
-		boolean bHasForceVendorID = oldargv.contains( "-force_vendor_id" );
-		boolean bHasForceDeviceID = oldargv.contains( "-force_device_id" );
+		//boolean bHasForceVendorID = oldargv.contains( "-force_vendor_id" );
+		//boolean bHasForceDeviceID = oldargv.contains( "-force_device_id" );
 
 		StringBuilder sb = new StringBuilder();
 
 		// SanyaSho: force this args to command line
-		if( !bHasForceVendorID )
+		/*if( !bHasForceVendorID )
 		{
 			Log.d( TAG, "force_vendor_id argv is missing, appending." );
 			sb.append( "-force_vendor_id 0x10DE" ).append( " " );
@@ -84,7 +84,7 @@ public class SharedUtil
 		{
 			Log.d( TAG, "force_device_id argv is missing, appending." );
 			sb.append( "-force_device_id 0x1180" ).append( " " );
-		}
+		}*/
 
 		String[] oldargvarr = oldargv.split( " " );
 		for( String str : oldargvarr )
