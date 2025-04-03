@@ -8,7 +8,7 @@
 	<string name="csso_download_url" translatable="false">https://cloud.tyabus.co.uk/s/3q4jsDPR6bAwgmf</string>
 
 	<!-- TODO(SanyaSho): 1.17 <string name="default_commandline_arguments" translatable="false">-nobackgroundlevel</string> -->
-	<string name="default_commandline_arguments" translatable="false">-console -gameuiproportionality</string>
+	<string name="default_commandline_arguments" translatable="false">-gameuiproportionality</string>
 	<string name="default_gamedir" translatable="false">/sdcard/srceng</string>
 	<string name="launcher_icon_description" translatable="false">Counter Strike Source Offensive</string>
 	<string name="csso_version" translatable="false">2.0.0b4+</string>

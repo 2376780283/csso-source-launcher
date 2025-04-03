@@ -1,0 +1,2 @@
+"molotov_child_flame05a"
+"particle\\fire_burning_character\\fire_env_fire_depthblend_oriented.vmt"

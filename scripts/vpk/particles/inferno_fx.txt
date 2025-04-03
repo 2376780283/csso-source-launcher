@@ -1,0 +1,41 @@
+render_animated_sprites
+
+Radius Scale
+Lifespan Decay
+Alpha Fade In Random
+Alpha Fade Out Random
+Movement Basic
+Rotation Orient Relative to CP
+Cull when crossing sphere √
+Movement Place On Ground √
+Oscillate Scalar
+
+Position Within Sphere Random
+Alpha Random
+Color Random
+Rotation Random
+Position Modify Offset Random
+Sequence Random
+Remap Initial Scalar
+Rotation Yaw Flip Random
+Radius Random
+Remap Initial Distance to Control Point to Scalar
+Remap Scalar to Vector
+Position Modify Place On Ground √
+Lifetime From Sequence
+Position Modify Offset Random
+Position Modify Place On Ground
+Velocity Noise
+Position Within Box Random
+Lifetime Pre-Age Noise
+Movement Dampen Relative to Control Point
+Position From Parent Particles
+Rotation Speed Random
+Sequence Two Random
+
+emit_continuously
+
+twist around axis
+Pull towards control point
+random force
+Force based on distance from plane √
