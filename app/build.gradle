@@ -20,6 +20,8 @@ android {
 		}
 	}
 
+	project.ext.set("archivesBaseName", "csso")
+
 	defaultConfig {
 		applicationId "me.dmk95"
 		applicationIdSuffix "csso"
@@ -27,7 +29,6 @@ android {
 		targetSdk 29
 		versionCode getBuildNum()
 		versionName "1.0"
-		archivesBaseName "csso"
 	}
 
 	sourceSets {
