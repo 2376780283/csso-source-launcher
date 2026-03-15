@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CSSO"
+rootProject.name = "csso-source-launcher"
 include ':app'

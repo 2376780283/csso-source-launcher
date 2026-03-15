@@ -28,7 +28,6 @@ import androidx.annotation.NonNull;
 
 import me.dmk95.csso.R;
 import me.sanyasho.util.SharedUtil;
-import su.xash.fwgslib.CertCheck;
 
 public class LauncherActivity extends Activity
 {
@@ -88,14 +87,6 @@ public class LauncherActivity extends Activity
 
 		super.setTheme( 0x01030224 );
 
-		/*if( CertCheck.dumbAntiMoronCheck( this ) )
-		{
-			Toast.makeText( this, "Buckle the fuck up little doggy", Toast.LENGTH_LONG ).show();
-
-			finish();
-			return;
-		}*/
-
 		mPref = getSharedPreferences( "mod", 0 );
 
 		setContentView( R.layout.activity_launcher );
@@ -105,12 +96,6 @@ public class LauncherActivity extends Activity
 
 		Button button = findViewById( R.id.button_launch );
 		button.setOnClickListener( LauncherActivity.this::startSource );
-
-		if( CertCheck.IsDebugBuild() )
-		{
-			TextView debugWarning = findViewById( R.id.internal_debug_build_warning );
-			debugWarning.setVisibility( View.VISIBLE );
-		}
 
 		Button aboutButton = findViewById( R.id.button_about );
 		aboutButton.setOnClickListener( this::aboutEngine );
@@ -122,18 +107,6 @@ public class LauncherActivity extends Activity
 			intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
 			startActivity( intent );
 		} );
-
-		/*Button getHL2Button = findViewById( R.id.get_hl2 );
-		getHL2Button.setOnClickListener( v ->
-		{
-			SharedUtil.startBrowser( getApplicationContext(), "https://store.steampowered.com/app/240" ); // Counter-Strike Source: Deathmatch store page
-		} );
-
-		Button getCSSOCButton = findViewById( R.id.get_csso );
-		getCSSOCButton.setOnClickListener( v ->
-		{
-			SharedUtil.startBrowser( getApplicationContext(), getString( R.string.csso_download_url ) );
-		} );*/
 
 		cmdArgs.setText( mPref.getString( "argv", getString( R.string.default_commandline_arguments ) ) );
 		GamePath.setText( mPref.getString( "gamepath", getDefaultDir() + "/srceng" ) );
@@ -185,13 +158,6 @@ public class LauncherActivity extends Activity
 		String argv = SharedUtil.prepareArgv( cmdArgs.getText().toString() );
 		i.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
 		saveSettings( mPref.edit() );
-
-		/*// SanyaSho: add -force_hardware_id here
-		String APKKEY = CertCheck.getApkKey();
-		if( !APKKEY.isEmpty() )
-		{
-			argv = argv + "-force_hardware_id " + APKKEY + " ";
-		}*/
 
 		if( argv.length() != 0 )
 			i.putExtra( "argv", argv );

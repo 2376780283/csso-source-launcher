@@ -31,21 +31,12 @@ android {
 		versionName "1.0"
 	}
 
-	sourceSets {
-		debug {
-			java.srcDirs = [ 'src/main/java', 'src/build-debug/java' ]
-		}
-		release {
-			java.srcDirs = [ 'src/main/java', 'src/build-release/java' ]
-		}
-	}
-
 	buildTypes {
 		debug {
 			minifyEnabled false
 			shrinkResources false
 			debuggable true
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
 		}
 		release {
 			minifyEnabled false
