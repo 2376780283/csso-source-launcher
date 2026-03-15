@@ -445,8 +445,8 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 		if( Build.VERSION.SDK_INT >= 23 )
 			applyPermissions( new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO }, REQUEST_PERMISSIONS );
 
-		if( checkSelfPermission( Manifest.permission.WRITE_EXTERNAL_STORAGE ) == PackageManager.PERMISSION_GRANTED && checkSelfPermission( Manifest.permission.RECORD_AUDIO ) == PackageManager.PERMISSION_GRANTED )
-			init();
+		// if( checkSelfPermission( Manifest.permission.WRITE_EXTERNAL_STORAGE ) == PackageManager.PERMISSION_GRANTED && checkSelfPermission( Manifest.permission.RECORD_AUDIO ) == PackageManager.PERMISSION_GRANTED )
+		init();
 	}
 
 	protected void pauseNativeThread()

@@ -25,6 +25,7 @@
 	<string name="csso_bad_device">Sorry, your device is too bad for this game.\nYou can\'t run CSSO.</string>
 
 	<string name="play_time_title">Total Play Time</string>
+	<string name="view_crash_log">查看崩溃日志</string>
 
 	<!-- New About dialog stuff -->
 	<string name="about_links" translatable="false">

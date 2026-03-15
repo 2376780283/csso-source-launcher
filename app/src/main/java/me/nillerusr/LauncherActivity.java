@@ -108,6 +108,9 @@ public class LauncherActivity extends Activity
 
 	public void onCreate( Bundle savedInstanceState )
 	{
+		// Initialize crash handler
+		CrashHandler.init(this);
+
 		super.onCreate( savedInstanceState );
 		PKG_NAME = getApplication().getPackageName();
 		requestWindowFeature( Window.FEATURE_NO_TITLE );
@@ -171,6 +174,15 @@ public class LauncherActivity extends Activity
 		long totalHours = totalPlayTimeMs / (1000 * 60 * 60);
 		long totalMinutes = (totalPlayTimeMs % (1000 * 60 * 60)) / (1000 * 60);
 		playTimeText.setText( totalHours + "h " + totalMinutes + "m" );
+
+		// View crash log button
+		Button crashLogButton = findViewById( R.id.button_view_crash_log );
+		crashLogButton.setOnClickListener( v ->
+		{
+			Intent intent = new Intent( LauncherActivity.this, CrashActivity.class );
+			intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+			startActivity( intent );
+		} );
 
 		// permissions check based on Android version
 		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R )
