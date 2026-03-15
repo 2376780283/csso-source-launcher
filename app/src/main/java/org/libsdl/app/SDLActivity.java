@@ -58,7 +58,7 @@ import android.Manifest;
 
 import me.nillerusr.DirchActivity;
 
-import com.valvesoftware.ValveActivity2;
+import zzh.source.launcher.utils.GameBridge;
 
 import java.util.Hashtable;
 import java.util.Locale;
@@ -327,7 +327,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 			return;
 		}
 
-		if( !ValveActivity2.preInit( this, getIntent() ) )
+		if( !GameBridge.preInit( this, getIntent() ) )
 		{
 			mBrokenLibraries = true; // Funny hack, but should work
 			mSingleton = this;
@@ -359,7 +359,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 		SDL.setContext( this );
 
 		Intent intent = getIntent();
-		ValveActivity2.initNatives( this, getIntent() );
+		GameBridge.initNatives( this, getIntent() );
 
 		mClipboardHandler = new SDLClipboardHandler();
 

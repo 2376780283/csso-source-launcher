@@ -1,4 +1,4 @@
-package com.valvesoftware;
+package zzh.source.launcher.utils;
 
 import java.io.File;
 import java.util.Locale;
@@ -14,7 +14,7 @@ import me.nillerusr.ExtractAssets;
 import me.nillerusr.LauncherActivity;
 import me.dmk95.csso.R;
 
-public class ValveActivity2 // not activity, i am lazy to change native methods
+public class GameBridge // not activity, i am lazy to change native methods
 {
 	public static SharedPreferences mPref;
 
