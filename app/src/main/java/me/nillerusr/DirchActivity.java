@@ -46,6 +46,7 @@ public class DirchActivity extends Activity implements OnTouchListener
 	public void ListDirectory( String path )
 	{
 		TextView header = findViewById( R.id.header_txt );
+		TextView currentPathInfo = findViewById( R.id.current_path_info );
 		File myDirectory = new File( path );
 
 		File[] directories = myDirectory.listFiles( File::isDirectory );
@@ -63,6 +64,10 @@ public class DirchActivity extends Activity implements OnTouchListener
 		{
 			cur_dir = myDirectory.getCanonicalPath();
 			header.setText( cur_dir );
+			if( currentPathInfo != null )
+			{
+				currentPathInfo.setText( cur_dir );
+			}
 		}
 		catch( IOException e )
 		{
@@ -140,6 +145,11 @@ public class DirchActivity extends Activity implements OnTouchListener
 		body = findViewById( R.id.bodych );
 		TextView header = findViewById( R.id.header_txt );
 		header.setText( "" );
+		TextView currentPathInfo = findViewById( R.id.current_path_info );
+		if( currentPathInfo != null )
+		{
+			currentPathInfo.setText( "未选择" );
+		}
 
 		Button button = findViewById( R.id.button_choice );
 		button.setOnClickListener( v ->

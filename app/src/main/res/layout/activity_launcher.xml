@@ -54,18 +54,56 @@
 			android:textColor="#FFFFFF" />
 	</LinearLayout>
 
+	<!-- Main content area with left-right structure -->
 	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
 		android:layout_above="@+id/footer"
 		android:layout_below="@+id/header"
-		android:layout_gravity="center"
+		android:orientation="horizontal"
 		android:paddingTop="5dp"
 		android:paddingBottom="5dp">
 
+		<!-- Left panel -->
 		<LinearLayout
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="#FF353535"
+			android:gravity="center"
+			android:orientation="vertical"
+			android:padding="20dp">
+
+			<!-- Game logo or icon can be placed here -->
+			<ImageView
+				android:layout_width="120dp"
+				android:layout_height="120dp"
+				android:layout_marginBottom="20dp"
+				android:background="@drawable/csso_icon" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="CS:SO"
+				android:textColor="#FFFFFF"
+				android:textSize="24sp"
+				android:textStyle="bold" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:text="Counter-Strike: Source Offensive"
+				android:textColor="#CCCCCC"
+				android:textSize="14sp" />
+
+		</LinearLayout>
+
+		<!-- Right panel - Settings -->
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1.5"
 			android:background="#FF353535"
 			android:orientation="vertical"
 			android:paddingLeft="10dp"
@@ -74,8 +112,8 @@
 			android:paddingBottom="10dp">
 
 			<LinearLayout
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
 				android:background="#FF212121"
 				android:orientation="vertical"
 				android:paddingLeft="10dp"
@@ -93,7 +131,8 @@
 						android:layout_width="fill_parent"
 						android:layout_height="wrap_content"
 						android:background="#FF313131"
-						android:orientation="vertical">
+						android:orientation="vertical"
+						android:padding="10dp">
 
 						<!-- Command line args -->
 						<TextView
@@ -102,7 +141,9 @@
 							android:layout_marginLeft="5dp"
 							android:layout_marginRight="5dp"
 							android:text="@string/srceng_launcher_command_args"
-							android:textAppearance="?android:attr/textAppearanceMedium" />
+							android:textAppearance="?android:attr/textAppearanceMedium"
+							android:textColor="#FFFFFF" />
+
 						<EditText
 							android:id="@+id/edit_cmdline"
 							android:layout_width="match_parent"
@@ -110,22 +151,25 @@
 							android:layout_marginLeft="3dp"
 							android:layout_marginRight="3dp"
 							android:layout_marginTop="5dp"
-							android:layout_marginBottom="5dp"
+							android:layout_marginBottom="15dp"
 							android:backgroundTint="@color/hl_color"
 							android:inputType="text"
 							android:maxLines="1"
 							android:text="@string/default_commandline_arguments"
 							android:autofillHints=""
+							android:textColor="#FFFFFF"
 							tools:ignore="LabelFor" />
 
 						<!-- Game resources -->
 						<TextView
 							android:layout_width="match_parent"
-							android:layout_height="wrap_content" 
+							android:layout_height="wrap_content"
 							android:layout_marginLeft="5dp"
 							android:layout_marginRight="5dp"
 							android:text="@string/srceng_launcher_game_path"
-							android:textAppearance="?android:attr/textAppearanceMedium"/>
+							android:textAppearance="?android:attr/textAppearanceMedium"
+							android:textColor="#FFFFFF" />
+
 						<EditText
 							android:id="@+id/edit_gamepath"
 							android:layout_width="match_parent"
@@ -139,7 +183,9 @@
 							android:maxLines="1"
 							android:text="@string/default_gamedir"
 							android:autofillHints=""
+							android:textColor="#FFFFFF"
 							tools:ignore="LabelFor" />
+
 						<Button
 							android:id="@+id/button_gamedir"
 							android:layout_width="match_parent"
@@ -149,7 +195,7 @@
 							android:layout_marginRight="3dp"
 							android:layout_marginTop="5dp"
 							android:layout_marginBottom="5dp"
-							android:textColor="#FFFFFF"/>
+							android:textColor="#FFFFFF" />
 					</LinearLayout>
 				</ScrollView>
 			</LinearLayout>
