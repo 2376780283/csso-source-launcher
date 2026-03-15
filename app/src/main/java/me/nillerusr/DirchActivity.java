@@ -9,12 +9,14 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -107,6 +109,33 @@ public class DirchActivity extends Activity implements OnTouchListener
 		super.setTheme( 0x01030224 );
 
 		setContentView( R.layout.activity_directory_choice );
+
+		// Enable fullscreen mode and ignore cutout (notch) area
+		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.P )
+		{
+			// Android 9 (API 28) and above - use display cutout mode
+			getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+		}
+
+		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R )
+		{
+			// Android 11 (API 30) and above - use WindowInsetsController
+			getWindow().setDecorFitsSystemWindows( false );
+			getWindow().getInsetsController().hide( android.view.WindowInsets.Type.systemBars() );
+			getWindow().getInsetsController().setSystemBarsBehavior( android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE );
+		}
+		else
+		{
+			// Android 10 and below - use legacy fullscreen flags
+			getWindow().getDecorView().setSystemUiVisibility(
+				View.SYSTEM_UI_FLAG_FULLSCREEN |
+				View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+				View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+				View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+				View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+				View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+			);
+		}
 		cur_dir = null;
 		body = findViewById( R.id.bodych );
 		TextView header = findViewById( R.id.header_txt );

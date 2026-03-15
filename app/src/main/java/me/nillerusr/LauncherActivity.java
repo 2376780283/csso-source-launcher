@@ -13,12 +13,15 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -63,7 +66,31 @@ public class LauncherActivity extends Activity
 	{
 		if( requestCode == REQUEST_PERMISSIONS )
 		{
-			if( grantResults[ 0 ] == PackageManager.PERMISSION_DENIED )
+			boolean allGranted = true;
+
+			// For Android 11+, check MANAGE_EXTERNAL_STORAGE permission
+			if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R )
+			{
+				if( !Environment.isExternalStorageManager() )
+				{
+					allGranted = false;
+				}
+			}
+
+			// Check other permissions (RECORD_AUDIO)
+			if( grantResults.length > 0 )
+			{
+				for( int result : grantResults )
+				{
+					if( result == PackageManager.PERMISSION_DENIED )
+					{
+						allGranted = false;
+						break;
+					}
+				}
+			}
+
+			if( !allGranted )
 			{
 				Toast.makeText( this, R.string.srceng_launcher_error_no_permission, Toast.LENGTH_LONG ).show();
 				finish();
@@ -91,6 +118,33 @@ public class LauncherActivity extends Activity
 
 		setContentView( R.layout.activity_launcher );
 
+		// Enable fullscreen mode and ignore cutout (notch) area
+		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.P )
+		{
+			// Android 9 (API 28) and above - use display cutout mode
+			getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+		}
+
+		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R )
+		{
+			// Android 11 (API 30) and above - use WindowInsetsController
+			getWindow().setDecorFitsSystemWindows( false );
+			getWindow().getInsetsController().hide( android.view.WindowInsets.Type.systemBars() );
+			getWindow().getInsetsController().setSystemBarsBehavior( android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE );
+		}
+		else
+		{
+			// Android 10 and below - use legacy fullscreen flags
+			getWindow().getDecorView().setSystemUiVisibility(
+				View.SYSTEM_UI_FLAG_FULLSCREEN |
+				View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+				View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+				View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+				View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+				View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+			);
+		}
+
 		cmdArgs = findViewById( R.id.edit_cmdline );
 		GamePath = findViewById( R.id.edit_gamepath );
 
@@ -111,8 +165,35 @@ public class LauncherActivity extends Activity
 		cmdArgs.setText( mPref.getString( "argv", getString( R.string.default_commandline_arguments ) ) );
 		GamePath.setText( mPref.getString( "gamepath", getDefaultDir() + "/srceng" ) );
 
-		// permissions check
-		applyPermissions( new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO }, REQUEST_PERMISSIONS );
+		// permissions check based on Android version
+		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R )
+		{
+			// Android 11 (API 30) and above - check MANAGE_EXTERNAL_STORAGE
+			if( !Environment.isExternalStorageManager() )
+			{
+				// Show dialog to guide user to settings
+				new AlertDialog.Builder( this )
+					.setTitle( "权限要求" )
+					.setMessage( "需要访问所有文件权限来运行游戏。请在设置中开启此权限。" )
+					.setPositiveButton( "去设置", ( dialog, which ) -> {
+						Intent intent = new Intent( android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION );
+						startActivity( intent );
+					} )
+					.setNegativeButton( "取消", ( dialog, which ) -> {
+						Toast.makeText( this, R.string.srceng_launcher_error_no_permission, Toast.LENGTH_LONG ).show();
+						finish();
+					} )
+					.setCancelable( false )
+					.show();
+			}
+			// RECORD_AUDIO can be requested normally
+			applyPermissions( new String[] { Manifest.permission.RECORD_AUDIO }, REQUEST_PERMISSIONS );
+		}
+		else
+		{
+			// Android 10 (API 29) and below - use traditional storage permission
+			applyPermissions( new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO }, REQUEST_PERMISSIONS );
+		}
 
 		boolean isCommitEmpty = getResources().getString( R.string.current_commit ).isEmpty();
 		boolean isURLEmpty = getResources().getString( R.string.update_url ).isEmpty();
