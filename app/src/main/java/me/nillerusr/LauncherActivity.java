@@ -165,6 +165,13 @@ public class LauncherActivity extends Activity
 		cmdArgs.setText( mPref.getString( "argv", getString( R.string.default_commandline_arguments ) ) );
 		GamePath.setText( mPref.getString( "gamepath", getDefaultDir() + "/srceng" ) );
 
+		// Display total play time
+		TextView playTimeText = findViewById( R.id.text_play_time );
+		long totalPlayTimeMs = SDLActivity.getTotalPlayTime( this );
+		long totalHours = totalPlayTimeMs / (1000 * 60 * 60);
+		long totalMinutes = (totalPlayTimeMs % (1000 * 60 * 60)) / (1000 * 60);
+		playTimeText.setText( totalHours + "h " + totalMinutes + "m" );
+
 		// permissions check based on Android version
 		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R )
 		{

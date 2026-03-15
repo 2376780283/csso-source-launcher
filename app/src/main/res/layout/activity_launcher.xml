@@ -196,6 +196,30 @@
 							android:layout_marginTop="5dp"
 							android:layout_marginBottom="5dp"
 							android:textColor="#FFFFFF" />
+
+						<!-- Play time display -->
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp"
+							android:layout_marginRight="5dp"
+							android:layout_marginTop="15dp"
+							android:text="@string/play_time_title"
+							android:textAppearance="?android:attr/textAppearanceMedium"
+							android:textColor="#FFFFFF" />
+
+						<TextView
+							android:id="@+id/text_play_time"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp"
+							android:layout_marginRight="5dp"
+							android:layout_marginTop="5dp"
+							android:layout_marginBottom="15dp"
+							android:text="0h 0m"
+							android:textColor="#CCCCCC"
+							android:textSize="16sp" />
+
 					</LinearLayout>
 				</ScrollView>
 			</LinearLayout>

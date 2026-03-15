@@ -9,6 +9,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -66,17 +67,20 @@ import java.util.List;
 
 import me.dmk95.csso.R;
 
-/**
-    SDL Activity
-*/
+	/**
+	    SDL Activity
+	*/
 public class SDLActivity extends Activity implements View.OnSystemUiVisibilityChangeListener
 {
 	private static final String TAG = "SDL";
+	private static final String PREFS_NAME = "GamePlayTime";
+	private static final String KEY_TOTAL_TIME = "total_play_time";
+
+	private long mSessionStartTime;
 
 	public static boolean mIsInitCalled;
 	public static boolean mIsResumedCalled, mHasFocus;
 	public static final boolean mHasMultiWindow = ( Build.VERSION.SDK_INT >= 24 );
-
 	// Cursor types
 	// private static final int SDL_SYSTEM_CURSOR_NONE = -1;
 	private static final int SDL_SYSTEM_CURSOR_ARROW = 0;
@@ -434,6 +438,8 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 		Log.v( TAG, "onCreate()" );
 		super.onCreate( savedInstanceState );
 
+		mSessionStartTime = System.currentTimeMillis();
+
 		mIsInitCalled = false;
 
 		if( Build.VERSION.SDK_INT >= 23 )
@@ -639,7 +645,22 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
 		SDLActivity.nativeQuit();
 
+		// Save play time
+		long sessionEndTime = System.currentTimeMillis();
+		long sessionDuration = sessionEndTime - mSessionStartTime;
+		SharedPreferences prefs = getSharedPreferences( PREFS_NAME, MODE_PRIVATE );
+		long totalPlayTime = prefs.getLong( KEY_TOTAL_TIME, 0 );
+		totalPlayTime += sessionDuration;
+		prefs.edit().putLong( KEY_TOTAL_TIME, totalPlayTime ).apply();
+		Log.v( TAG, "Session duration: " + sessionDuration + "ms, Total play time: " + totalPlayTime + "ms" );
+
 		super.onDestroy();
+	}
+
+	public static long getTotalPlayTime( Context context )
+	{
+		SharedPreferences prefs = context.getSharedPreferences( PREFS_NAME, Context.MODE_PRIVATE );
+		return prefs.getLong( KEY_TOTAL_TIME, 0 );
 	}
 
 	@Override

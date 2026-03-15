@@ -24,6 +24,8 @@
 	<string name="csso_game_check">Please, remove \"-game\" from command line arguments.</string>
 	<string name="csso_bad_device">Sorry, your device is too bad for this game.\nYou can\'t run CSSO.</string>
 
+	<string name="play_time_title">Total Play Time</string>
+
 	<!-- New About dialog stuff -->
 	<string name="about_links" translatable="false">
 		• <a href="https://t.me/csgomodcss">Telegram (CSSO Port)</a>\n
