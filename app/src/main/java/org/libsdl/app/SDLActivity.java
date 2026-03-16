@@ -651,7 +651,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 		// Save play time
 		long sessionEndTime = System.currentTimeMillis();
 		long sessionDuration = sessionEndTime - mSessionStartTime;
-		SharedPreferences prefs = getSharedPreferences( PREFS_NAME, MODE_PRIVATE );
+		SharedPreferences prefs = SDL.getContext().getSharedPreferences( PREFS_NAME, Context.MODE_PRIVATE );
 		long totalPlayTime = prefs.getLong( KEY_TOTAL_TIME, 0 );
 		totalPlayTime += sessionDuration;
 		prefs.edit().putLong( KEY_TOTAL_TIME, totalPlayTime ).apply();
