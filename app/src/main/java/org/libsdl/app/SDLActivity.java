@@ -51,6 +51,7 @@ import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -129,6 +130,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 	protected static Hashtable< Integer, PointerIcon > mCursors;
 	protected static int mLastCursorID;
 	protected static SDLGenericMotionListener_API12 mMotionListener;
+	protected static android.widget.ProgressBar mProgressBar;
 
 	// This is what SDL runs in. It invokes SDL_main(), eventually
 	protected static Thread mSDLThread;
@@ -390,6 +392,29 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 		}
 
 		setContentView( mLayout );
+
+		// Create and show progress bar during initialization
+		mProgressBar = new ProgressBar( this, null, android.R.attr.progressBarStyleLarge );
+		RelativeLayout.LayoutParams progressParams = new RelativeLayout.LayoutParams(
+			RelativeLayout.LayoutParams.WRAP_CONTENT,
+			RelativeLayout.LayoutParams.WRAP_CONTENT
+		);
+		progressParams.addRule( RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE );
+		mLayout.addView( mProgressBar, progressParams );
+		mProgressBar.setVisibility( View.VISIBLE );
+
+		// Hide progress bar after 4 seconds
+		new Handler().postDelayed( new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				if( mProgressBar != null )
+				{
+					mProgressBar.setVisibility( View.GONE );
+				}
+			}
+		}, 4000 );
 
 		// Enable fullscreen mode and ignore cutout (notch) area
 		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.P )

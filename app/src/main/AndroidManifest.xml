@@ -31,6 +31,7 @@
             android:name="me.nillerusr.LauncherActivity"
             android:exported="true"
             android:screenOrientation="sensorLandscape"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,7 +55,7 @@
             android:name="me.nillerusr.CrashActivity"
             android:exported="false"
             android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@style/AppTheme">
         </activity>
 
         <activity
@@ -63,7 +64,7 @@
             android:configChanges="layoutDirection|locale|orientation|uiMode|screenLayout|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:launchMode="singleTask"
             android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="org.libsdl.app.SDLACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />

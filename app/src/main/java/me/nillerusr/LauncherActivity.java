@@ -113,9 +113,6 @@ public class LauncherActivity extends Activity
 
 		super.onCreate( savedInstanceState );
 		PKG_NAME = getApplication().getPackageName();
-		requestWindowFeature( Window.FEATURE_NO_TITLE );
-
-		super.setTheme( 0x01030224 );
 
 		mPref = getSharedPreferences( "mod", 0 );
 
