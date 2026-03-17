@@ -167,13 +167,13 @@ public class LauncherActivity extends Activity
 
 		// Display total play time
 		TextView playTimeText = findViewById( R.id.text_play_time );
-		long totalPlayTimeMs = SDLActivity.getTotalPlayTime( this );
+/*		long totalPlayTimeMs = SDLActivity.getTotalPlayTime( this );
 		Log.d( TAG, "Total play time (ms): " + totalPlayTimeMs );
 		long totalHours = totalPlayTimeMs / (1000 * 60 * 60);
 		long totalMinutes = (totalPlayTimeMs % (1000 * 60 * 60)) / (1000 * 60);
 		String timeText = totalHours + "h " + totalMinutes + "m";
-		Log.d( TAG, "Displaying play time: " + timeText );
-		playTimeText.setText( timeText );
+		Log.d( TAG, "Displaying play time: " + timeText );*/
+		// playTimeText.setText( timeText );
 
 		// View crash log button
 		Button crashLogButton = findViewById( R.id.button_view_crash_log );
