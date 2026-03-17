@@ -475,6 +475,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
 		// if( checkSelfPermission( Manifest.permission.WRITE_EXTERNAL_STORAGE ) == PackageManager.PERMISSION_GRANTED && checkSelfPermission( Manifest.permission.RECORD_AUDIO ) == PackageManager.PERMISSION_GRANTED )
 		init();
+		String version = nativeGetVersion();
 	}
 
 	protected void pauseNativeThread()
@@ -1016,6 +1017,8 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
 	// C functions we call
 	public static native int nativeSetupJNI();
+	
+    public static native String nativeGetVersion();
 
 	public static native int nativeRunMain( String library, String function, Object arguments );
 
