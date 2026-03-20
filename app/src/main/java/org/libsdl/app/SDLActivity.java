@@ -21,6 +21,7 @@ import android.hardware.Sensor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -679,7 +680,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
     @Override
     protected void onDestroy() {
-        Log.v(TAG, "onDestroy()");
+        Log.d(TAG, "onDestroy()");
 
         if (mHIDDeviceManager != null) {
             HIDDeviceManager.release(mHIDDeviceManager);
@@ -700,13 +701,14 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
             try {
                 SDLActivity.mSDLThread.join();
             } catch (Exception e) {
-                Log.v(TAG, "Problem stopping SDLThread: " + e);
+                Log.d(TAG, "Problem stopping SDLThread: " + e);
             }
         }
 
         SDLActivity.nativeQuit();
 
         super.onDestroy();
+        Process.killProcess(Process.myPid());
     }
 
     @Override
