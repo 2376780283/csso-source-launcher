@@ -223,6 +223,11 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     // This is what SDL runs in. It invokes SDL_main(), eventually
     protected static Thread mSDLThread;
 
+    // Loading dialog for initialization
+    private android.app.Dialog mLoadingDialog;
+    private Handler mLoadingHandler;
+    private Runnable mHideLoadingDialogRunnable;
+
     protected static SDLGenericMotionListener_API12 getMotionListener() {
         if (mMotionListener == null) {
             if (Build.VERSION.SDK_INT >= 26) {
@@ -316,6 +321,78 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
         mCurrentNativeState = NativeState.INIT;
     }
 
+    /**
+     * Show loading dialog with progress bar
+     */
+    private void showLoadingDialog() {
+        Log.v(TAG, "showLoadingDialog() called");
+        
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            Log.v(TAG, "Loading dialog already showing");
+            return;
+        }
+
+        // Create content view with ProgressBar
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.HORIZONTAL);
+        layout.setPadding(50, 50, 50, 50);
+        layout.setGravity(Gravity.CENTER_VERTICAL);
+
+        // Create ProgressBar
+        android.widget.ProgressBar progressBar = new android.widget.ProgressBar(this);
+        progressBar.setIndeterminate(true);
+        LinearLayout.LayoutParams progressParams = new LinearLayout.LayoutParams(100, 100);
+        progressParams.setMargins(0, 0, 30, 0);
+        progressBar.setLayoutParams(progressParams);
+
+        // Create TextView
+        TextView textView = new TextView(this);
+        textView.setText("正在初始化游戏...");
+        textView.setTextSize(18);
+        textView.setPadding(20, 0, 0, 0);
+
+        layout.addView(progressBar);
+        layout.addView(textView);
+
+        // Create AlertDialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setView(layout);
+        builder.setCancelable(false);
+        
+        mLoadingDialog = builder.create();
+        mLoadingDialog.show();
+        
+        Log.v(TAG, "Loading dialog shown");
+
+        // Initialize handler for auto-hide after 6 seconds
+        mLoadingHandler = new Handler();
+        mHideLoadingDialogRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Log.v(TAG, "Auto-hiding loading dialog after 6 seconds");
+                hideLoadingDialog();
+            }
+        };
+
+        // Auto-hide after 6 seconds
+        mLoadingHandler.postDelayed(mHideLoadingDialogRunnable, 6000);
+    }
+
+    /**
+     * Hide loading dialog
+     */
+    private void hideLoadingDialog() {
+        Log.v(TAG, "hideLoadingDialog() called");
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            Log.v(TAG, "Dismissing loading dialog");
+            mLoadingDialog.dismiss();
+            mLoadingDialog = null;
+        }
+        if (mLoadingHandler != null && mHideLoadingDialogRunnable != null) {
+            mLoadingHandler.removeCallbacks(mHideLoadingDialogRunnable);
+        }
+    }
+
     protected SDLSurface createSDLSurface(Context context) {
         return new SDLSurface(context);
     }
@@ -333,6 +410,8 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
         } catch (Exception e) {
             Log.v(TAG, "modify thread properties failed " + e.toString());
         }
+        
+        showLoadingDialog();
 
         // Load shared libraries
         String errorMsgBrokenLib = "";
@@ -427,6 +506,11 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
         }
 
         setContentView(mLayout);
+
+        // Show loading dialog during initialization (after setContentView)
+        Log.v(TAG, "About to show loading dialog...");
+        showLoadingDialog();
+        Log.v(TAG, "Loading dialog should be showing now");
 
         setWindowStyle(false);
 
