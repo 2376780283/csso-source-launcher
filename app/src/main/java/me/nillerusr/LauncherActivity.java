@@ -109,7 +109,7 @@ public class LauncherActivity extends Activity
 	public void onCreate( Bundle savedInstanceState )
 	{
 		// Initialize crash handler
-		CrashHandler.init(this);
+		// pCrashHandler.init(this);
 
 		super.onCreate( savedInstanceState );
 		PKG_NAME = getApplication().getPackageName();
