@@ -17,6 +17,12 @@
 #-keepattributes SourceFile,LineNumberTable
 -keep class org.libsdl.app.** { *; }
 -keep class com.valvesoftware.** { *; }
+-keepclasseswithmembernames class org.libsdl.app.SDLActivity {
+   native <methods>;
+}
+-keepclasseswithmembernames class org.libsdl.app.SDLInputConnection {
+   native <methods>;
+}
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile

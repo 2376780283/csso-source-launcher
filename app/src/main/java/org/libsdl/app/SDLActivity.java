@@ -415,7 +415,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
         setContentView(mLayout);
 
-        setWindowStyle(false);
+        setWindowStyle(true);
 
         getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(this);
 
@@ -581,36 +581,26 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     }
 
     @Override
-    protected void onDestroy() {
-        Log.v(TAG, "onDestroy()");
-
+    protected void onDestroy() {       
         if (mHIDDeviceManager != null) {
             HIDDeviceManager.release(mHIDDeviceManager);
             mHIDDeviceManager = null;
         }
-
         SDLAudioManager.release(this);
-
         if (SDLActivity.mBrokenLibraries) {
            super.onDestroy();
            return;
         }
-
         if (SDLActivity.mSDLThread != null) {
-
-            // Send Quit event to "SDLThread" thread
             SDLActivity.nativeSendQuit();
-
-            // Wait for "SDLThread" thread to end
             try {
-                SDLActivity.mSDLThread.join();
-            } catch(Exception e) {
-                Log.v(TAG, "Problem stopping SDLThread: " + e);
+                SDLActivity.mSDLThread.join(5000);
+                if (SDLActivity.mSDLThread.isAlive()) {                   
+                }
+            } catch(Exception e) {               
             }
         }
-
         SDLActivity.nativeQuit();
-
         super.onDestroy();
         Process.killProcess(Process.myPid());
     }
